@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DBGoglickModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ID_actor" />
+          </Key>
+          <Property Name="ID_actor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middlename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rank" Type="varchar" MaxLength="50" />
+          <Property Name="Experience" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobActorsTheatre">
+          <Key>
+            <PropertyRef Name="ID_job" />
+          </Key>
+          <Property Name="ID_job" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Actor" Type="int" />
+          <Property Name="Spectakl" Type="int" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="CostContract" Type="money" />
+        </EntityType>
+        <EntityType Name="Spektakli">
+          <Key>
+            <PropertyRef Name="ID_spektaklya" />
+          </Key>
+          <Property Name="ID_spektaklya" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameSP" Type="varchar" MaxLength="50" />
+          <Property Name="YearProduction" Type="date" />
+          <Property Name="Budget" Type="money" />
+          <Property Name="ImagePreview" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_JobActorsTheatre_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="0..1" />
+          <End Role="JobActorsTheatre" Type="Self.JobActorsTheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="ID_actor" />
+            </Principal>
+            <Dependent Role="JobActorsTheatre">
+              <PropertyRef Name="Actor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobActorsTheatre_Spektakli">
+          <End Role="Spektakli" Type="Self.Spektakli" Multiplicity="0..1" />
+          <End Role="JobActorsTheatre" Type="Self.JobActorsTheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spektakli">
+              <PropertyRef Name="ID_spektaklya" />
+            </Principal>
+            <Dependent Role="JobActorsTheatre">
+              <PropertyRef Name="Spectakl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DBGoglickModelContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobActorsTheatre" EntityType="Self.JobActorsTheatre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spektakli" EntityType="Self.Spektakli" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_JobActorsTheatre_Actors" Association="Self.FK_JobActorsTheatre_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="JobActorsTheatre" EntitySet="JobActorsTheatre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobActorsTheatre_Spektakli" Association="Self.FK_JobActorsTheatre_Spektakli">
+            <End Role="Spektakli" EntitySet="Spektakli" />
+            <End Role="JobActorsTheatre" EntitySet="JobActorsTheatre" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBGoglickModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ID_actor" />
+          </Key>
+          <Property Name="ID_actor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JobActorsTheatre" Relationship="Self.FK_JobActorsTheatre_Actors" FromRole="Actors" ToRole="JobActorsTheatre" />
+        </EntityType>
+        <EntityType Name="JobActorsTheatre">
+          <Key>
+            <PropertyRef Name="ID_job" />
+          </Key>
+          <Property Name="ID_job" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Actor" Type="Int32" />
+          <Property Name="Spectakl" Type="Int32" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CostContract" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Actors" Relationship="Self.FK_JobActorsTheatre_Actors" FromRole="JobActorsTheatre" ToRole="Actors" />
+          <NavigationProperty Name="Spektakli" Relationship="Self.FK_JobActorsTheatre_Spektakli" FromRole="JobActorsTheatre" ToRole="Spektakli" />
+        </EntityType>
+        <EntityType Name="Spektakli">
+          <Key>
+            <PropertyRef Name="ID_spektaklya" />
+          </Key>
+          <Property Name="ID_spektaklya" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameSP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YearProduction" Type="DateTime" Precision="0" />
+          <Property Name="Budget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ImagePreview" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="JobActorsTheatre" Relationship="Self.FK_JobActorsTheatre_Spektakli" FromRole="Spektakli" ToRole="JobActorsTheatre" />
+        </EntityType>
+        <Association Name="FK_JobActorsTheatre_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="0..1" />
+          <End Role="JobActorsTheatre" Type="Self.JobActorsTheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="ID_actor" />
+            </Principal>
+            <Dependent Role="JobActorsTheatre">
+              <PropertyRef Name="Actor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobActorsTheatre_Spektakli">
+          <End Role="Spektakli" Type="Self.Spektakli" Multiplicity="0..1" />
+          <End Role="JobActorsTheatre" Type="Self.JobActorsTheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spektakli">
+              <PropertyRef Name="ID_spektaklya" />
+            </Principal>
+            <Dependent Role="JobActorsTheatre">
+              <PropertyRef Name="Spectakl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBGoglickEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actors" />
+          <EntitySet Name="JobActorsTheatre" EntityType="Self.JobActorsTheatre" />
+          <EntitySet Name="Spektakli" EntityType="Self.Spektakli" />
+          <AssociationSet Name="FK_JobActorsTheatre_Actors" Association="Self.FK_JobActorsTheatre_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="JobActorsTheatre" EntitySet="JobActorsTheatre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobActorsTheatre_Spektakli" Association="Self.FK_JobActorsTheatre_Spektakli">
+            <End Role="Spektakli" EntitySet="Spektakli" />
+            <End Role="JobActorsTheatre" EntitySet="JobActorsTheatre" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBGoglickModelContainer" CdmEntityContainer="DBGoglickEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="DBGoglickModel.Actors">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="ID_actor" ColumnName="ID_actor" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobActorsTheatre">
+            <EntityTypeMapping TypeName="DBGoglickModel.JobActorsTheatre">
+              <MappingFragment StoreEntitySet="JobActorsTheatre">
+                <ScalarProperty Name="ID_job" ColumnName="ID_job" />
+                <ScalarProperty Name="Actor" ColumnName="Actor" />
+                <ScalarProperty Name="Spectakl" ColumnName="Spectakl" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CostContract" ColumnName="CostContract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spektakli">
+            <EntityTypeMapping TypeName="DBGoglickModel.Spektakli">
+              <MappingFragment StoreEntitySet="Spektakli">
+                <ScalarProperty Name="ID_spektaklya" ColumnName="ID_spektaklya" />
+                <ScalarProperty Name="NameSP" ColumnName="NameSP" />
+                <ScalarProperty Name="YearProduction" ColumnName="YearProduction" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

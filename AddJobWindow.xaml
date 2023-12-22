@@ -1,0 +1,26 @@
+﻿<Window x:Class="Praktika07.AddJobWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Praktika07"
+        mc:Ignorable="d"
+            Title="Окно добавления занятости" MaxHeight="450" MinHeight="450" Width="560" MinWidth="360" MaxWidth="560" ResizeMode="NoResize">
+    <Grid Background="#FFFFD235" Height="434" VerticalAlignment="Bottom">
+        <Border MinWidth="400" Background="#FF85FF6D" VerticalAlignment="Top" Padding="130" MaxWidth="500" CornerRadius="5" Height="264" Margin="0,62,0,0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Color="Black" ShadowDepth="0"></DropShadowEffect>
+            </Border.Effect>
+        </Border>
+        <Label Content="Актер" HorizontalAlignment="Left" Margin="56,85,0,0" VerticalAlignment="Top" Width="139" FontWeight="DemiBold" FontSize="20"/>
+        <Label Content="Спектакль" HorizontalAlignment="Left" Margin="56,139,0,0" VerticalAlignment="Top" Width="139" FontWeight="DemiBold" FontSize="20" Height="34"/>
+        <Label Content="Роль" HorizontalAlignment="Left" Margin="56,187,0,0" VerticalAlignment="Top" Width="139" FontWeight="DemiBold" FontSize="20" Height="34"/>
+        <ComboBox x:Name="CmbSpek" SelectedItem="{Binding Spektakli}" HorizontalAlignment="Left" Margin="200,147,0,0" VerticalAlignment="Top" Width="302" DisplayMemberPath="NameSP"/>
+        <TextBox Text="{Binding Role}" HorizontalAlignment="Left" Margin="200,199,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="302" Background="#FF85FF6D"/>
+        <Button x:Name="AddNewJob" Content="Добавить занятость" HorizontalAlignment="Left" Margin="30,349,0,0" VerticalAlignment="Top" Width="490" Click="AddNewJob_Click" Height="55" FontSize="25" Background="#FF85FF6D"/>
+        <Label Content="$контракта" HorizontalAlignment="Left" Margin="56,247,0,0" VerticalAlignment="Top" Width="139" FontWeight="DemiBold" FontSize="20" Height="34"/>
+        <ComboBox x:Name="CmbActor" SelectedItem="{Binding Actors}" HorizontalAlignment="Left" Margin="200,92,0,0"  VerticalAlignment="Top" Width="302" DisplayMemberPath="Name"/>
+        <TextBox Text="{Binding CostContract}" HorizontalAlignment="Left" Margin="200,263,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="302" Background="#FF85FF6D"/>
+
+    </Grid>
+</Window>

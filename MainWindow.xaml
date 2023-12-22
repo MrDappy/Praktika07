@@ -1,0 +1,37 @@
+﻿<Window x:Class="Praktika07.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Praktika07"
+        mc:Ignorable="d"
+        Title="Админ-панель занятостей Театра" Height="700" Width="910" MinHeight="700" MinWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#FF4C3A27" Orientation="Horizontal">
+            
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Width="910" Height="620" Background="#FFD7E48B">
+            <Image Source="/Resources/logo4.png" Width="100" 
+       HorizontalAlignment="Left" Margin="750 50 0 0"/>
+            <Image Source=".//Resources/logo1.png"
+                   Opacity=".4"
+                   Width="800"
+                   Height="520" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="BtnSpektakli" Click="BtnSpektakli_Click" Height="80" Margin="72,93,510,440" FontSize="25" Background="#FF5B6552" Foreground="#FFB7FF9E">Спектакли</Button>
+            <Button Grid.Column="0" x:Name="BtnActors" Click="BtnActors_Click" Height="80" Margin="72,256,510,277" FontSize="25" Background="#FF5B6552" Foreground="#FFB7FF9E">Актеры</Button>
+            <Button Grid.Column="0" x:Name="BtnJob_Actors" Click="BtnJob_Actors_Click" Height="80" Margin="72,393,510,140" FontSize="25" Background="#FF5B6552" Foreground="#FFB7FF9E">Занятость актеров театра</Button>
+        </Grid>
+    </Grid>
+</Window>
